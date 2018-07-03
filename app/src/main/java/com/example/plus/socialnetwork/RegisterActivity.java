@@ -41,6 +41,7 @@ public class RegisterActivity extends AppCompatActivity {
         mAuth=FirebaseAuth.getInstance();
 
 
+
         createAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

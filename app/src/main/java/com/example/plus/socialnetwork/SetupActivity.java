@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -54,21 +55,22 @@ public class SetupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup);
 
-        loadingBar=new ProgressDialog(this);
+        loadingBar = new ProgressDialog(this);
 
 
-        mAuth=FirebaseAuth.getInstance();
-        currentUserID=mAuth.getCurrentUser().getUid();
-        usersRef=FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserID);
+        mAuth = FirebaseAuth.getInstance();
 
-        userProfileImageRef=FirebaseStorage.getInstance().getReference().child("Profile Images");
+            currentUserID = mAuth.getCurrentUser().getUid();
+        usersRef = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserID);
+
+        userProfileImageRef = FirebaseStorage.getInstance().getReference().child("Profile Images");
 
 
         userName = findViewById(R.id.setup_username);
         fullName = findViewById(R.id.setup_full_name);
         countryName = findViewById(R.id.setup_country);
         profileImage = findViewById(R.id.setup_profile_image);
-        saveInformationButton =findViewById(R.id.setup_informationSave_button);
+        saveInformationButton = findViewById(R.id.setup_informationSave_button);
 
 
         saveInformationButton.setOnClickListener(new View.OnClickListener() {
@@ -82,7 +84,7 @@ public class SetupActivity extends AppCompatActivity {
         profileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent galleryIntent=new Intent();
+                Intent galleryIntent = new Intent();
                 galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
                 galleryIntent.setType("image/*");
                 startActivityForResult(galleryIntent, Gallery_Pick);
@@ -93,13 +95,13 @@ public class SetupActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-             if(dataSnapshot.exists()) {
-                 if (dataSnapshot.hasChild("profileimage")) {
-                     String image = dataSnapshot.child("profileimage").getValue().toString();
+                if (dataSnapshot.exists()) {
+                    if (dataSnapshot.hasChild("profileimage")) {
+                        String image = dataSnapshot.child("profileimage").getValue().toString();
 
-                     Picasso.get().load(image).placeholder(R.drawable.profile).into(profileImage);
-                 }
-             }
+                        Picasso.with(SetupActivity.this).load(image).placeholder(R.drawable.profile).into(profileImage);
+                    }
+                }
 
             }
 
@@ -108,6 +110,7 @@ public class SetupActivity extends AppCompatActivity {
 
             }
         });
+
     }
 
     @Override

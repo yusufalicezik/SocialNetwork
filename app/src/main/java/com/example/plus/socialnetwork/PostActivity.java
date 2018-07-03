@@ -178,40 +178,38 @@ public class PostActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                if(dataSnapshot.exists())
-                {
-                    String userFullname=dataSnapshot.child("fullname").getValue().toString();
-                    String userProfileImage=dataSnapshot.child("profileimage").getValue().toString();
+                if(dataSnapshot.exists()) {
+                    if (dataSnapshot.hasChild("profileimage")) {
+                        String userFullname = dataSnapshot.child("fullname").getValue().toString();
+                        String userProfileImage = dataSnapshot.child("profileimage").getValue().toString();
 
-                    HashMap postsMap=new HashMap();
-                    postsMap.put("uid",currentUserID);
-                    postsMap.put("date",saveCurrentDate);
-                    postsMap.put("time",saveCurrentTime);
-                    postsMap.put("description",description);
-                    postsMap.put("postimage",downloadUrl);
-                    postsMap.put("profileimage",userProfileImage);
-                    postsMap.put("fullname",userFullname);
+                        HashMap postsMap = new HashMap();
+                        postsMap.put("uid", currentUserID);
+                        postsMap.put("date", saveCurrentDate);
+                        postsMap.put("time", saveCurrentTime);
+                        postsMap.put("description", description);
+                        postsMap.put("postimage", downloadUrl);
+                        postsMap.put("profileimage", userProfileImage);
+                        postsMap.put("fullname", userFullname);
 
-                    postsRef.child(currentUserID+postRandomName).updateChildren(postsMap).addOnCompleteListener(new OnCompleteListener() {
-                        @Override
-                        public void onComplete(@NonNull Task task) {
+                        postsRef.child(postRandomName+currentUserID).updateChildren(postsMap).addOnCompleteListener(new OnCompleteListener() {
+                            @Override
+                            public void onComplete(@NonNull Task task) {
 
-                            if(task.isSuccessful())
-                            {
-                                SendUserToMainActivity();
-                                Toast.makeText(PostActivity.this, "Post is updated successfully...", Toast.LENGTH_SHORT).show();
-                                loadingBar.dismiss();
+                                if (task.isSuccessful()) {
+                                    SendUserToMainActivity();
+                                    Toast.makeText(PostActivity.this, "Post is updated successfully...", Toast.LENGTH_SHORT).show();
+                                    loadingBar.dismiss();
+                                } else {
+                                    String message = task.getException().getMessage();
+                                    Toast.makeText(PostActivity.this, "Error occured : " + message, Toast.LENGTH_SHORT).show();
+                                    loadingBar.dismiss();
+                                }
                             }
-                            else
-                            {
-                                String message=task.getException().getMessage();
-                                Toast.makeText(PostActivity.this, "Error occured : "+message, Toast.LENGTH_SHORT).show();
-                                loadingBar.dismiss();
-                            }
-                        }
-                    });
+                        });
 
 
+                    }
                 }
             }
 
