@@ -168,6 +168,12 @@ public class MainActivity extends AppCompatActivity {
                     protected void populateViewHolder(PostsViewHolder viewHolder, Posts model, int position)
                     {
 
+                        //to click
+                        final String postKey=getRef(position).getKey();
+                        //to click end
+
+
+
                         viewHolder.setFullname(model.getFullname());
                         viewHolder.setTime(model.getTime());
                         viewHolder.setDate(model.getDate());
@@ -175,6 +181,17 @@ public class MainActivity extends AppCompatActivity {
                         viewHolder.setProfileimage(getApplicationContext(),model.getProfileimage());
                         viewHolder.setPostimage(getApplicationContext(),model.getPostimage());
 
+
+                        //to click
+                        viewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent clickPostIntent=new Intent(MainActivity.this,ClickPostActivity.class);
+                                clickPostIntent.putExtra("postKey",postKey);
+                                startActivity(clickPostIntent);
+                            }
+                        });
+                        //end click
                     }
                 };
         postList.setAdapter(firebaseRecyclerAdapter);
@@ -328,7 +345,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Messages", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_settings:
-                Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
+                sendUserToSettingsActivity();
                 break;
             case R.id.nav_Logout:
                 mAuth.signOut();
@@ -339,6 +356,13 @@ public class MainActivity extends AppCompatActivity {
 
 
         }
+    }
+
+    private void sendUserToSettingsActivity()
+    {
+        Intent settingsIntent=new Intent(MainActivity.this,SettingsActivity.class);
+        startActivity(settingsIntent);
+
     }
 
 
