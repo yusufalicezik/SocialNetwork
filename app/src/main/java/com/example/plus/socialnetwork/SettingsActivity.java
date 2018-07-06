@@ -168,45 +168,52 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void postGuncelle()
     {
-        //////////////Çıkmadan öncee
-        refimRef= FirebaseDatabase.getInstance().getReference().child("Posts");
 
-        refimRef.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                System.out.println("1EEEEEEEEEEEEEEEEEEEEEEEEEEEEEE"+dataSnapshot.child("uid").getValue().toString());
-                //refimRef.child(dataSnapshot.getKey().toString())
+        if(downloadUrl!=null) {
 
-                if(currentUserID.equals(dataSnapshot.child("uid").getValue().toString()))
-                {
-                    refimRef.child(dataSnapshot.getKey().toString()).child("fullname").setValue(userProfName.getText().toString());
-                    refimRef.child(dataSnapshot.getKey().toString()).child("profileimage").setValue(downloadUrl);
+
+            //////////////Çıkmadan öncee-- hem user, hem de posttaki (eski post, eski profil resmi, eski username) i değiştirmek için..
+            refimRef = FirebaseDatabase.getInstance().getReference().child("Posts");
+
+            refimRef.addChildEventListener(new ChildEventListener() {
+                @Override
+                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                    if (dataSnapshot.exists()) {
+
+                        if (dataSnapshot.hasChild("uid")) {
+                            System.out.println("1EEEEEEEEEEEEEEEEEEEEEEEEEEEEEE" + dataSnapshot.child("uid").getValue().toString());
+                            //refimRef.child(dataSnapshot.getKey().toString())
+
+                            if (currentUserID.equals(dataSnapshot.child("uid").getValue().toString())) {
+                                refimRef.child(dataSnapshot.getKey().toString()).child("fullname").setValue(userProfName.getText().toString());
+                                refimRef.child(dataSnapshot.getKey().toString()).child("profileimage").setValue(downloadUrl);
+                            }
+                        }
+                    }
                 }
-            }
 
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
+                @Override
+                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
 
 
+                }
 
-            }
+                @Override
+                public void onChildRemoved(DataSnapshot dataSnapshot) {
 
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                }
 
-            }
+                @Override
+                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
 
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                }
 
-            }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+                }
+            });
+        }
 
     }
 
@@ -252,7 +259,7 @@ public class SettingsActivity extends AppCompatActivity {
                         {
 
 
-                             downloadUrl =task.getResult().getDownloadUrl().toString();
+                             downloadUrl=task.getResult().getDownloadUrl().toString();
 
 
 
