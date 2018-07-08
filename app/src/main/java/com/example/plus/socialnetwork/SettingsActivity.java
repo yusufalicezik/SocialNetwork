@@ -46,7 +46,7 @@ public class SettingsActivity extends AppCompatActivity {
     private Toolbar mToolbar;
 
 
-    private DatabaseReference settingsUserRef,settingsPostsRef,refimRef;
+    private DatabaseReference settingsUserRef,refimRef;
     private FirebaseAuth mAuth;
     private String currentUserID;
 
@@ -73,7 +73,7 @@ public class SettingsActivity extends AppCompatActivity {
         currentUserID=mAuth.getCurrentUser().getUid();
 
         settingsUserRef= FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserID);
-        settingsPostsRef= FirebaseDatabase.getInstance().getReference().child("Posts");
+
 
 
 
@@ -109,7 +109,13 @@ public class SettingsActivity extends AppCompatActivity {
 
                 if(dataSnapshot.exists())
                 {
-                    String myProfileImage=dataSnapshot.child("profileimage").getValue().toString();
+
+                    if(dataSnapshot.hasChild("profileimage"))
+                    {
+                        String myProfileImage=dataSnapshot.child("profileimage").getValue().toString();
+                        Picasso.with(SettingsActivity.this).load(myProfileImage).placeholder(R.drawable.profile).into(userProfImage);
+                    }
+
                     String myUsername=dataSnapshot.child("username").getValue().toString();
                     String myProfileName=dataSnapshot.child("fullname").getValue().toString();
                     String myProfileStatus=dataSnapshot.child("status").getValue().toString();
@@ -119,7 +125,7 @@ public class SettingsActivity extends AppCompatActivity {
                     String myRelationStatus=dataSnapshot.child("relationship").getValue().toString();
 
 
-                    Picasso.with(SettingsActivity.this).load(myProfileImage).placeholder(R.drawable.profile).into(userProfImage);
+
                     userName.setText(myUsername);
                     userProfName.setText(myProfileName);
                     userStatus.setText(myProfileStatus);
@@ -145,6 +151,7 @@ public class SettingsActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 validateAccountInfo();
+                sendUserToMainActivity();
 
 
             }
@@ -169,7 +176,7 @@ public class SettingsActivity extends AppCompatActivity {
     private void postGuncelle()
     {
 
-        if(downloadUrl!=null) {
+
 
 
             //////////////Çıkmadan öncee-- hem user, hem de posttaki (eski post, eski profil resmi, eski username) i değiştirmek için..
@@ -184,9 +191,21 @@ public class SettingsActivity extends AppCompatActivity {
                             System.out.println("1EEEEEEEEEEEEEEEEEEEEEEEEEEEEEE" + dataSnapshot.child("uid").getValue().toString());
                             //refimRef.child(dataSnapshot.getKey().toString())
 
+
+
+                            // refimRef.child(dataSnapshot.getKey().toString()).child("counter").setValue(geciciCount);
+
+
                             if (currentUserID.equals(dataSnapshot.child("uid").getValue().toString())) {
+
+
+
                                 refimRef.child(dataSnapshot.getKey().toString()).child("fullname").setValue(userProfName.getText().toString());
+                                if(downloadUrl!=null) {
+
+
                                 refimRef.child(dataSnapshot.getKey().toString()).child("profileimage").setValue(downloadUrl);
+                                }
                             }
                         }
                     }
@@ -213,7 +232,7 @@ public class SettingsActivity extends AppCompatActivity {
 
                 }
             });
-        }
+
 
     }
 
@@ -345,7 +364,7 @@ public class SettingsActivity extends AppCompatActivity {
             loadingBar.show();
 
             updateAccountInfo(username,profilename,status,gender,dob,country,relation);
-            postGuncelle();
+
         }
 
 
@@ -371,7 +390,7 @@ public class SettingsActivity extends AppCompatActivity {
 
                 if(task.isSuccessful())
                 {
-                    sendUserToMainActivity();
+
                     Toast.makeText(SettingsActivity.this, "Account settings updated successfully.", Toast.LENGTH_SHORT).show();
                     loadingBar.dismiss();
                 }

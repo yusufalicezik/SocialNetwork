@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#ed4c54</color>
-    <color name="colorPrimaryDark">#67c415</color>
+    <color name="colorPrimaryDark">#e32b475c</color>
     <color name="colorAccent">#E9EBEE</color>
     <color name="MyRed">#761e1e</color>
     <color name="MyGrey">#8fdfdddd</color>
     <color name="MyWhite">#e3dfdddd</color>
     <color name="colorProfile">#3b4041</color>
+    <color name="mainBackground">#D7D7D7</color>
+    <color name="old">#6effffff</color>
+    <color name="sari">#c6ad2d</color>
 </resources>

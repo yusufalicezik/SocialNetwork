@@ -4,21 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login"
-    tools:context=".RegisterActivity">
 
-    <ImageView
-        android:id="@+id/register_icon"
-        android:layout_width="150dp"
-        android:layout_height="0dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/register_email"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo" />
+    android:background="@drawable/a333"
+    tools:context=".RegisterActivity"
+    tools:layout_editor_absoluteY="25dp">
 
     <EditText
         android:id="@+id/register_email"
@@ -26,17 +15,19 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="315dp"
         android:background="@drawable/inputs"
         android:drawableLeft="@drawable/email"
         android:ems="10"
+        android:fontFamily="serif-monospace"
         android:hint="E-mail"
         android:inputType="textEmailAddress"
+        android:textColor="@color/colorPrimaryDark"
         android:padding="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/register_password"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/register_icon" />
+        app:layout_constraintTop_toBottomOf="@+id/txtlogo1" />
 
     <EditText
         android:id="@+id/register_password"
@@ -44,15 +35,19 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="27dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/inputs"
         android:drawableLeft="@drawable/password"
         android:ems="10"
+        android:fontFamily="serif-monospace"
         android:hint="Password"
         android:inputType="textPassword"
+        android:textColor="@color/colorPrimaryDark"
         android:padding="10dp"
         app:layout_constraintBottom_toTopOf="@+id/register_confirm_password"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/register_email" />
 
@@ -62,10 +57,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/register_password"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/inputs"
         android:drawableLeft="@drawable/password"
+        android:textColor="@color/colorPrimaryDark"
         android:ems="10"
+        android:fontFamily="serif-monospace"
         android:hint="Confirm Password"
         android:inputType="textPassword"
         android:padding="10dp"
@@ -82,15 +79,46 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="54dp"
         android:background="@drawable/button"
-        android:fontFamily="sans-serif"
-        android:padding="10dp"
+        android:fontFamily="serif-monospace"
+        android:padding="15dp"
         android:text="Create Account"
         android:textAllCaps="false"
         android:textColor="@color/colorAccent"
         android:textSize="16sp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/register_confirm_password" />
+
+    <TextView
+        android:id="@+id/txtlogo1"
+        android:layout_width="158dp"
+        android:layout_height="136dp"
+        android:layout_marginStart="82dp"
+        android:layout_marginTop="80dp"
+        android:fontFamily="casual"
+        android:text="Wot's  Hapinn"
+        android:textColor="@color/old"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/register_email"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtlogo2"
+        android:layout_width="176dp"
+        android:layout_height="187dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="23dp"
+        android:layout_marginBottom="7dp"
+        android:fontFamily="casual"
+        android:text="W"
+        android:textColor="@color/old"
+        android:textSize="120sp"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toTopOf="@+id/register_email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

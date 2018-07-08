@@ -8,9 +8,12 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,7 +36,12 @@ public class LoginActivity extends AppCompatActivity {
 
     private Button loginButton;
     private EditText userEmail,userPassword;
-    private TextView needNewAccountLink;
+    private TextView needNewAccountLink, forgetPasswordLink;
+    //anim için..
+    TextView logo1,logo2;
+    LinearLayout layout1;
+
+    //
 
     private FirebaseAuth mAuth;
     private ProgressDialog loadingBar;
@@ -84,6 +92,15 @@ public class LoginActivity extends AppCompatActivity {
         loginButton=findViewById(R.id.login_button);
         userEmail=findViewById(R.id.login_email);
         userPassword=findViewById(R.id.login_password);
+        forgetPasswordLink=findViewById(R.id.forget_pasword_link);
+
+
+        ///anim
+        layout1=findViewById(R.id.linearLayout);
+        logo1=findViewById(R.id.txtlogo1);
+        logo2=findViewById(R.id.txtlogo2);
+        //
+
 
         mAuth=FirebaseAuth.getInstance();
         loadingBar=new ProgressDialog(this);
@@ -101,6 +118,14 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 AllowingUserToLogin();
+            }
+        });
+
+
+        forgetPasswordLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LoginActivity.this,ResetPasswordActivity.class));
             }
         });
 
@@ -237,9 +262,56 @@ public class LoginActivity extends AppCompatActivity {
         FirebaseUser currentUser=mAuth.getCurrentUser();
         if(currentUser!=null)
             sendUserToMainActivity();
+        else
+            animasyonlariCalistir();
 
 
         super.onStart();
+    }
+
+
+    private void animasyonlariCalistir() {
+
+      /*  Animation animation = AnimationUtils.loadAnimation(this, R.anim.yukari);
+        animation.reset();
+        userEmail.clearAnimation();
+        userEmail.startAnimation(animation);
+        userPassword.clearAnimation();
+        userPassword.startAnimation(animation); */
+
+
+        Animation animation4 = AnimationUtils.loadAnimation(this, R.anim.push_left);
+        animation4.reset();
+        userPassword.clearAnimation();
+        userPassword.startAnimation(animation4);
+
+
+        Animation animation5 = AnimationUtils.loadAnimation(this, R.anim.push_right);
+        animation5.reset();
+        userEmail.clearAnimation();
+        userEmail.startAnimation(animation5);
+
+
+        Animation animation2 = AnimationUtils.loadAnimation(this, R.anim.yukari);
+        animation2.reset();
+        loginButton.clearAnimation();
+        loginButton.startAnimation(animation2);
+
+
+        Animation animation3 = AnimationUtils.loadAnimation(this, R.anim.animation_yuklenme);
+        animation3.reset();
+        logo1.clearAnimation();
+        logo1.startAnimation(animation3);
+        logo2.clearAnimation();
+        logo2.startAnimation(animation3);
+        forgetPasswordLink.clearAnimation();
+        forgetPasswordLink.startAnimation(animation3);
+        needNewAccountLink.clearAnimation();
+        needNewAccountLink.startAnimation(animation3);
+        layout1.clearAnimation();
+        layout1.startAnimation(animation3);
+
+
     }
 
     private void sendUserToMainActivity()

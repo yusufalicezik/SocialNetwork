@@ -53,7 +53,12 @@ public class ProfileActivity extends AppCompatActivity {
 
                 if(dataSnapshot.exists())
                 {
-                    String myProfileImage=dataSnapshot.child("profileimage").getValue().toString();
+                    if(dataSnapshot.hasChild("profileimage"))
+                    {
+                        String myProfileImage=dataSnapshot.child("profileimage").getValue().toString();
+                        Picasso.with(ProfileActivity.this).load(myProfileImage).placeholder(R.drawable.profile).into(userProfileImage);
+                    }
+
                     String myUsername=dataSnapshot.child("username").getValue().toString();
                     String myProfileName=dataSnapshot.child("fullname").getValue().toString();
                     String myProfileStatus=dataSnapshot.child("status").getValue().toString();
@@ -63,7 +68,7 @@ public class ProfileActivity extends AppCompatActivity {
                     String myRelationStatus=dataSnapshot.child("relationship").getValue().toString();
 
 
-                    Picasso.with(ProfileActivity.this).load(myProfileImage).placeholder(R.drawable.profile).into(userProfileImage);
+
 
                     userName.setText("@"+myUsername);
                     userProfName.setText(myProfileName);

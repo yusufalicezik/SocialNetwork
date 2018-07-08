@@ -34,8 +34,14 @@
             android:name=".SettingsActivity"
             android:parentActivityName=".MainActivity" />
         <activity android:name=".ProfileActivity" />
-        <activity android:name=".FindFriendsActivity"
-            android:parentActivityName=".MainActivity" ></activity>
+        <activity
+            android:name=".FindFriendsActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".CommentsActivity" />
+        <activity
+            android:name=".ResetPasswordActivity"
+            android:parentActivityName=".LoginActivity" />
+        <activity android:name=".PersonProfileActivity"></activity>
     </application>
 
 </manifest>

@@ -48,6 +48,8 @@ public class PostActivity extends AppCompatActivity {
     private StorageReference postsImagesRefrence;
 
     private String saveCurrentDate, saveCurrentTime, postRandomName,downloadUrl,currentUserID;
+    private long countPosts=0;
+
 
     private DatabaseReference usersRef,postsRef;
     private FirebaseAuth mAuth;
@@ -173,24 +175,49 @@ public class PostActivity extends AppCompatActivity {
 
     private void SavingPostInformationToDatabase() //postu paylaşan kişinin ıd sini kullanarak ismini çektik..
     {
+        postsRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                if (dataSnapshot.exists())
+                {
+                countPosts=dataSnapshot.getChildrenCount();
+                }
+                else
+                {
+                countPosts=0;
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         usersRef.child(currentUserID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 if(dataSnapshot.exists()) {
-                    if (dataSnapshot.hasChild("profileimage")) {
-                        String userFullname = dataSnapshot.child("fullname").getValue().toString();
-                        String userProfileImage = dataSnapshot.child("profileimage").getValue().toString();
+                    HashMap postsMap = new HashMap();
 
-                        HashMap postsMap = new HashMap();
+
+
+                    if (dataSnapshot.hasChild("profileimage")) {
+                        String userProfileImage = dataSnapshot.child("profileimage").getValue().toString();
+                        postsMap.put("profileimage", userProfileImage);
+                    }
+                        String userFullname = dataSnapshot.child("fullname").getValue().toString();
                         postsMap.put("uid", currentUserID);
                         postsMap.put("date", saveCurrentDate);
                         postsMap.put("time", saveCurrentTime);
                         postsMap.put("description", description);
                         postsMap.put("postimage", downloadUrl);
-                        postsMap.put("profileimage", userProfileImage);
+
                         postsMap.put("fullname", userFullname);
+                        postsMap.put("counter",countPosts);
 
                         postsRef.child(currentUserID+postRandomName).updateChildren(postsMap).addOnCompleteListener(new OnCompleteListener() {
                             @Override
@@ -209,7 +236,7 @@ public class PostActivity extends AppCompatActivity {
                         });
 
 
-                    }
+
                 }
             }
 
