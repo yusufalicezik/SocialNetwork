@@ -4,61 +4,68 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/register"
+    android:background="@color/colorPrimaryDark"
     tools:context=".ClickPostActivity">
 
-    <ImageView
-        android:id="@+id/click_postimage"
-        android:layout_width="wrap_content"
-        android:layout_height="400dp"
-        android:layout_margin="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/click_postdescription"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/select_image" />
-
-    <TextView
-        android:id="@+id/click_postdescription"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="25dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="Post Description"
-        android:textAlignment="center"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/click_postimage"
-        app:layout_constraintStart_toStartOf="@+id/click_postimage"
-        app:layout_constraintTop_toBottomOf="@+id/click_postimage" />
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/deletePostButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Delete"
-        android:background="@drawable/button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/editPostButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/click_postdescription" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <Button
-        android:id="@+id/editPostButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="edıt"
-        android:background="@drawable/button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/deletePostButton"
-        app:layout_constraintTop_toBottomOf="@+id/click_postdescription" />
+            <ImageView
+                android:id="@+id/click_postimage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:textAlignment="center"
+                app:layout_constraintBottom_toTopOf="@+id/click_postdescription"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/select_image" />
+
+            <TextView
+                android:id="@+id/click_postdescription"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_marginTop="10dp"
+                android:text="Post Description"
+                android:textAlignment="center"
+                android:textColor="@color/MyGrey"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/click_postimage"
+                app:layout_constraintStart_toStartOf="@+id/click_postimage"
+                app:layout_constraintTop_toBottomOf="@+id/click_postimage" />
+
+
+            <Button
+                android:id="@+id/deletePostButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:background="@drawable/button"
+                android:padding="8dp"
+                android:text="Delete"
+                android:textColor="@color/MyGrey" />
+
+            <Button
+                android:id="@+id/editPostButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:background="@drawable/button"
+                android:padding="8dp"
+                android:text="edıt"
+                android:textColor="@color/MyGrey" />
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
 </android.support.constraint.ConstraintLayout>

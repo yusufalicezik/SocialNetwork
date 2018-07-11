@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#ed4c54</color>
+    <color name="colorPrimary">#e32b475c</color>
     <color name="colorPrimaryDark">#e32b475c</color>
     <color name="colorAccent">#E9EBEE</color>
     <color name="MyRed">#761e1e</color>
@@ -10,4 +10,6 @@
     <color name="mainBackground">#D7D7D7</color>
     <color name="old">#6effffff</color>
     <color name="sari">#c6ad2d</color>
+    <color name="MyGrey2">#d5dfdddd</color>
+    <color name="colorPrimaryDark2">#bd2b475c</color>
 </resources>

@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView postList;
     private Toolbar mToolbar;
-    private ImageButton addNewPostButton;
+
 
     private FirebaseAuth mAuth;
     private DatabaseReference usersRef,postsRef,likesRef;
@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             navigationView = findViewById(R.id.navigation_view);
 
-            addNewPostButton=findViewById(R.id.add_new_post_button);
+
 
 
 
@@ -142,12 +142,13 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-            addNewPostButton.setOnClickListener(new View.OnClickListener() {
+           /* addNewPostButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     SendUserToPostActivity();
                 }
             });
+            */
 
 
             DisplayAllUsersPosts();

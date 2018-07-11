@@ -62,7 +62,7 @@
 
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/button"
+        android:background="@drawable/buton_like_and_comment_background"
         android:fontFamily="serif-monospace"
         android:padding="10dp"
         android:text="Login"
@@ -73,7 +73,9 @@
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_password" />
+        app:layout_constraintTop_toBottomOf="@+id/login_password">
+
+    </Button>
 
     <TextView
         android:id="@+id/textView"
@@ -142,8 +144,8 @@
 
     <TextView
         android:id="@+id/txtlogo1"
-        android:layout_width="141dp"
-        android:layout_height="132dp"
+        android:layout_width="128dp"
+        android:layout_height="122dp"
         android:layout_marginStart="76dp"
         android:layout_marginTop="41dp"
         android:layout_marginBottom="50dp"
@@ -159,8 +161,8 @@
 
     <TextView
         android:id="@+id/txtlogo2"
-        android:layout_width="161dp"
-        android:layout_height="177dp"
+        android:layout_width="166dp"
+        android:layout_height="88dp"
         android:layout_marginStart="38dp"
         android:layout_marginTop="45dp"
         android:layout_marginEnd="37dp"
